@@ -2,6 +2,8 @@
 
 Welcome to the Rock Paper Scissors Webapp, an innovative, browser-based adaptation of the timeless game, built with Next.js 14. This application uses advanced AI for input recognition, while gameplay pits you against programmed computer moves.
 
+> **Note:** A German version of this description is available below.
+
 ## Features
 
 - **Multiple Input Methods**: Play using the method that suits you best:
