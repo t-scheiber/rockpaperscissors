@@ -1,0 +1,90 @@
+{
+  "header": {
+    "title": "Schere Stein Papier",
+    "mouseText": "Maus",
+    "keyboardText": "Tastatur",
+    "cameraText": "Kamera"
+  },
+  "footer": {
+    "project": "Bachelorprojekt"
+  },
+  "home": {
+    "title": "Willkommen bei Schere, Stein, Papier!",
+    "description": "Hier können Sie Ihr Eingabegerät auswählen.",
+    "mouseImageAlt": "Maus Abbildung",
+    "mouseText": "Maus",
+    "keyboardImageAlt": "Tastatur Abbildung",
+    "keyboardText": "Tastatur",
+    "cameraImageAlt": "Kamera Abbildung",
+    "cameraText": "Kamera",
+    "rulesTitle": "Regeln:",
+    "rules": "Stein schlägt Schere, Schere schneidet Papier, Papier wickelt Stein ein."
+  },
+  "mousegame": {
+    "description": "Dies ist der Maus-Eingabemodus, klicken Sie auf Ihre Wahl: Stein, Papier, Schere.",
+    "rock": "Stein",
+    "paper": "Papier",
+    "scissors": "Schere",
+    "altRock": "Stein Bild",
+    "altPaper": "Papier Bild",
+    "altScissors": "Schere Bild"
+  },
+  "keyboardgamecomponent": {
+    "description": "Dies ist der Tastatureingabemodus, drücken Sie die Taste für Ihre Wahl: Stein (R), Papier (P), Schere (S).",
+    "rock": "Stein",
+    "paper": "Papier",
+    "scissors": "Schere",
+    "altRock": "Stein Bild",
+    "altPaper": "Papier Bild",
+    "altScissors": "Schere Bild",
+    "rockKeyAltImage": "Bild einer R-Taste",
+    "paperKeyAltImage": "Bild einer P-Taste",
+    "scissorsKeyAltImage": "Bild einer S-Taste"
+  },
+  "cameragame": {
+    "descriptionA": "Dies ist der Webcam-Eingabemodus, drücken Sie die Taste, um ein Bild Ihrer Wahl aufzunehmen: Stein, Papier oder Schere.",
+    "descriptionB": "Nehmen Sie das Bild auf und lassen Sie die KI raten, was Sie halten!",
+    "descriptionC": "Es wird dann eine zufällige Auswahl für den Computer bestimmt und dann das Ergebnis angezeigt.",
+    "loadingCamera": "Die Webcam wird vorbereitet ..."
+  },
+  "webaicomp": {
+    "rock": "Stein",
+    "paper": "Papier",
+    "scissors": "Schere",
+    "altRock": "Stein Bild",
+    "altPaper": "Papier Bild",
+    "altScissors": "Schere Bild",
+    "captureButton": "Auslösen",
+    "resultPageButton": "Weiter",
+    "predictionText": "Schätzung der KI: ",
+    "retryButton": "Erneut versuchen",
+    "predictionLoading": "Bild wird analysiert...",
+    "errorMessageFallback": "Die Analyse ist fehlgeschlagen. Bitte erneut versuchen."
+  },
+  "result": {
+    "plChoice": "Deine Wahl: ",
+    "compChoice": "Computer Wahl: ",
+    "result": "Ergebnis: ",
+    "win": "Du hast gewonnen!",
+    "lose": "Du hast leider verloren!",
+    "draw": "Es ist Unentschieden!",
+    "rock": "Stein",
+    "paper": "Papier",
+    "scissors": "Schere",
+    "altRock": "Stein Bild",
+    "altPaper": "Papier Bild",
+    "altScissors": "Schere Bild",
+    "playAgainButton": "Nochmal spielen"
+  },
+  "resultButton": {
+    "btnText": "Weiter"
+  },
+  "language": {
+    "altText": "Englische Flagge",
+    "changeText": "Change to "
+  },
+  "error": {
+    "title": "Fehler",
+    "description": "Es ist ein Fehler aufgetreten."
+  }
+}

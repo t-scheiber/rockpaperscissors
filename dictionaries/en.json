@@ -1,0 +1,90 @@
+{
+  "header": {
+    "title": "Rock Paper Scissors",
+    "mouseText": "Mouse",
+    "keyboardText": "Keyboard",
+    "cameraText": "Webcam"
+  },
+  "footer": {
+    "project": "Bachelorproject"
+  },
+  "home": {
+    "title": "Welcome to Rock, Paper, Scissors!",
+    "description": "Here you choose your input device.",
+    "mouseImageAlt": "Mouse depiction",
+    "mouseText": "Mouse",
+    "keyboardImageAlt": "Keyboard depiction",
+    "keyboardText": "Keyboard",
+    "cameraImageAlt": "Webcam depiction",
+    "cameraText": "Webcam",
+    "rulesTitle": "Rules:",
+    "rules": "Rock beats scissors, scissors cut paper, paper wraps rock."
+  },
+  "mousegame": {
+    "description": "This is the mouse input mode, click on the image for your choice: Rock, Paper or Scissors.",
+    "rock": "Rock",
+    "paper": "Paper",
+    "scissors": "Scissors",
+    "altRock": "Rock Image",
+    "altPaper": "Paper Image",
+    "altScissors": "Scissors Image"
+  },
+  "keyboardgamecomponent": {
+    "description": "This is the keyboard input mode, press the key for your choice: Rock (R), Paper (P), Scissors (S).",
+    "rock": "Rock",
+    "paper": "Paper",
+    "scissors": "Scissors",
+    "altRock": "Rock Image",
+    "altPaper": "Paper Image",
+    "altScissors": "Scissors Image",
+    "rockKeyAltImage": "R-Key Image",
+    "paperKeyAltImage": "P-Key Image",
+    "scissorsKeyAltImage": "S-Key Image"
+  },
+  "cameragame": {
+    "descriptionA": "This is the webcam input mode, press the button to take a picture of your choice: Rock, Paper or Scissors.",
+    "descriptionB": "Take the picture and let the AI guess what you are holding!",
+    "descriptionC": "Then a random value will be chosen for the Computer. The winner will be determined based on the choices.",
+    "loadingCamera": "Preparing your webcam experience..."
+  },
+  "webaicomp": {
+    "rock": "Rock",
+    "paper": "Paper",
+    "scissors": "Scissors",
+    "altRock": "Rock Image",
+    "altPaper": "Paper Image",
+    "altScissors": "Scissors Image",
+    "captureButton": "Capture",
+    "resultPageButton": "Continue",
+    "predictionText": "AI Prediction: ",
+    "retryButton": "Try again",
+    "predictionLoading": "Analyzing your image...",
+    "errorMessageFallback": "We could not analyze the image. Please try again."
+  },
+  "result": {
+    "plChoice": "Your Choice: ",
+    "compChoice": "Computer's Choice: ",
+    "result": "Result: ",
+    "win": "You Win!",
+    "lose": "You Lose!",
+    "draw": "It's a Draw!",
+    "rock": "Rock",
+    "paper": "Paper",
+    "scissors": "Scissors",
+    "altRock": "Rock Image",
+    "altPaper": "Paper Image",
+    "altScissors": "Scissors Image",
+    "playAgainButton": "Play Again"
+  },
+  "resultButton": {
+    "btnText": "Continue"
+  },
+  "language": {
+    "altText": "German Flag",
+    "changeText": "Wechseln auf "
+  },
+  "error": {
+    "title": "Error",
+    "description": "An error occurred."
+  }
+}
