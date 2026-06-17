@@ -104,12 +104,12 @@ const WebcamComponent = () => {
           <div className="flex-col items-center gap-3 text-center">
             {predicted === "Rock" && (
               <p>
-                {t("predictionText")} + {t("rock")}
+                {t("predictionText")} {t("rock")}
               </p>
             )}
             {predicted === "Paper" && (
               <p>
-                {t("predictionText")} + {t("paper")}
+                {t("predictionText")} {t("paper")}
               </p>
             )}
             {predicted === "Scissors" && (
