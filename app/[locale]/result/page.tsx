@@ -12,9 +12,10 @@ type Choice = "Rock" | "Paper" | "Scissors";
 export default async function Result({
   searchParams,
 }: {
-  searchParams: { selectedValue?: string };
+  searchParams: Promise<{ selectedValue?: string }>;
 }) {
-  const playerValue = normalizeChoice(searchParams.selectedValue);
+  const { selectedValue } = await searchParams;
+  const playerValue = normalizeChoice(selectedValue);
   const [locale, t] = await Promise.all([
     getLocale(),
     getTranslations("result"),
