@@ -42,7 +42,7 @@
     "prettier-plugin-tailwindcss": "^0.8.0",
     "server-only": "^0.0.1",
     "tailwindcss": "^4.3.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
   "overrides": {
     "glob": "^13.0.6"
