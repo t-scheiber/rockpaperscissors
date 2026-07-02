@@ -29,7 +29,7 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.0",
+    "@tailwindcss/postcss": "^4.3.2",
     "@types/negotiator": "^0.6.4",
     "@types/node": "^25.9.4",
     "@types/react": "^19.2.15",
@@ -41,7 +41,7 @@
     "prettier": "3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "server-only": "^0.0.1",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3"
   },
   "overrides": {
