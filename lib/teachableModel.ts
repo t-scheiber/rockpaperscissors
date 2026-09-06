@@ -71,6 +71,28 @@ function loadImageElement(dataUrl: string) {
   });
 }
 
+// Match @teachablemachine/image 0.8.5 cropTo before applying its capture normalization.
+// https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+function centerCropImage(image: HTMLImageElement, size: number) {
+  const scale = size / Math.min(image.width, image.height);
+  const width = Math.ceil(image.width * scale);
+  const height = Math.ceil(image.height * scale);
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = size;
+  const context = canvas.getContext("2d");
+  if (!context) {
+    throw new Error("Unable to create a canvas for model input.");
+  }
+  context.drawImage(
+    image,
+    -Math.floor((width - size) / 2),
+    -Math.floor((height - size) / 2),
+    width,
+    height,
+  );
+  return canvas;
+}
+
 export async function predictHandFromImage(dataUrl: string) {
   const [tf, model, metadata, image] = await Promise.all([
     getTfModule(),
@@ -80,14 +102,9 @@ export async function predictHandFromImage(dataUrl: string) {
   ]);
 
   const logits = tf.tidy(() => {
-    const pixels = tf.browser.fromPixels(image).toFloat();
-    const resized = tf.image.resizeBilinear(
-      pixels,
-      [metadata.imageSize ?? FALLBACK_IMAGE_SIZE, metadata.imageSize ?? FALLBACK_IMAGE_SIZE],
-      true,
-    );
-    const normalized = resized.div(tf.scalar(255));
-    const batched = normalized.expandDims(0);
+    const cropped = centerCropImage(image, metadata.imageSize ?? FALLBACK_IMAGE_SIZE);
+    const batched = tf.browser.fromPixels(cropped).expandDims(0).toFloat()
+      .div(tf.scalar(127)).sub(tf.scalar(1));
     return model.predict(batched) as import("@tensorflow/tfjs").Tensor;
   });
 
