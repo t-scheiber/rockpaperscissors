@@ -18,6 +18,9 @@ async function getTfModule() {
     tfModulePromise = import("@tensorflow/tfjs").then(async (module) => {
       await module.ready();
       return module;
+    }).catch((error) => {
+      tfModulePromise = null;
+      throw error;
     });
   }
   return tfModulePromise;
@@ -28,7 +31,10 @@ async function getModel() {
     modelPromise = (async () => {
       const tf = await getTfModule();
       return tf.loadLayersModel(MODEL_PATH);
-    })();
+    })().catch((error) => {
+      modelPromise = null;
+      throw error;
+    });
   }
   return modelPromise;
 }
@@ -45,7 +51,11 @@ async function getMetadata() {
       .then((data: Metadata) => ({
         labels: data.labels ?? [],
         imageSize: data.imageSize ?? FALLBACK_IMAGE_SIZE,
-      }));
+      }))
+      .catch((error) => {
+        metadataPromise = null;
+        throw error;
+      });
   }
   return metadataPromise;
 }
