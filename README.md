@@ -125,3 +125,22 @@ bun run start
 - **Next-Intl**: Bietet umfassende Unterstützung für Internationalisierung.
 
 Diese Anwendung zeigt die Integration von modernen Webtechnologien und KI, bietet ein einzigartiges und fesselndes Spielerlebnis. Ursprünglich 2022 veröffentlicht und 2025 modernisiert, bleibt sie technisch auf dem neuesten Stand. Testen Sie Ihre Strategie gegen die zufälligen Züge des Computers und genießen Sie eine moderne Wendung des klassischen Spiels Schere Stein Papier!
+
+## Maintenance validation
+
+The supported maintenance baseline uses Node.js 22.23.2 and Bun 1.4.2. Install with `bun install --frozen-lockfile`, then run:
+
+```sh
+bun run build
+bun run typecheck
+bun run lint
+bun run test
+```
+
+The tests cover all nine game outcomes in both languages, localized mouse links, invalid result input, keyboard shortcuts, camera capture and retry behavior, and recovery after a failed model or metadata load. Camera and model prediction calls are stubbed in component tests. No camera permission, provider credentials or live inference is required.
+
+The production test starts the built Next server on loopback, checks both locales and game routes, and verifies every original public asset. Separate checks preserve all 5,671 training images, the original model artifacts and other retained assets, and validate the model weight manifest. The application still uses `bun run start` for its Next server. It is not a static export or a Pages deployment.
+
+Inter is bundled locally from the verified Google Fonts publisher artifact; its license and provenance are in `app/fonts/`. The original training data, model binaries, translations and UI assets are retained. The legacy automation workflow remains disabled remotely; its existing action references are pinned without activating it.
+
+These local checks do not establish the revision or runtime of either live domain. A protected GitHub Actions diagnostic and deployment verification are still required before maintenance onboarding.

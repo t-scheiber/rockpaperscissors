@@ -1,6 +1,6 @@
  
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,7 +8,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = localFont({ src: "../fonts/Inter-variable.ttf", display: "swap", weight: "100 900" });
 
 export const metadata: Metadata = {
   title: "Rock paper scissors",
