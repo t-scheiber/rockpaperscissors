@@ -11,7 +11,6 @@ import { predictHandFromImage } from "@/lib/teachableModel";
 const WebcamComponent = () => {
   const t = useTranslations("webaicomp");
   const locale = useLocale();
-  const againUrl = "/" + locale + "/cameragame";
   const resultUrl = "/" + locale + "/result";
   const videoConstraints = {
     width: 540,
@@ -26,15 +25,16 @@ const WebcamComponent = () => {
   const [predictionError, setPredictionError] = useState<string | null>(null);
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current?.getScreenshot();
-    setwebcamFeed(false);
     if (!imageSrc) {
+      setPredictionError(t("errorMessageFallback"));
       return;
     }
+    setwebcamFeed(false);
     setIsPredicting(true);
     setPredictionError(null);
     setPredicted("");
     setUrl(imageSrc);
-  }, [webcamRef]);
+  }, [t]);
 
   useEffect(() => {
     if (!url) {
@@ -48,8 +48,7 @@ const WebcamComponent = () => {
           setPredicted(result);
         }
       })
-      .catch((error) => {
-        console.error("Failed to run prediction", error);
+      .catch(() => {
         if (!cancelled) {
           setPredictionError(t("errorMessageFallback"));
         }
@@ -64,6 +63,14 @@ const WebcamComponent = () => {
       cancelled = true;
     };
   }, [t, url]);
+
+  const retry = () => {
+    setUrl("");
+    setPredicted("");
+    setPredictionError(null);
+    setIsPredicting(false);
+    setwebcamFeed(true);
+  };
 
   return (
     <>
@@ -95,8 +102,9 @@ const WebcamComponent = () => {
         </>
       )}
       {predictionError && (
-        <div className="mt-4 text-center text-sm text-red-500">
-          {predictionError}
+        <div role="alert" className="mt-4 text-center text-sm text-red-500">
+          <p>{predictionError}</p>
+          {!webcamFeed && <Button className="mt-3" onClick={retry}>{t("retryButton")}</Button>}
         </div>
       )}
       {predicted && !predictionError && (
@@ -118,9 +126,7 @@ const WebcamComponent = () => {
               </p>
             )}
             <div className="flex flex-col items-center">
-              <Link href={againUrl}>
-                <Button className="mt-3">{t("retryButton")}</Button>
-              </Link>
+              <Button className="mt-3" onClick={retry}>{t("retryButton")}</Button>
             </div>
           </div>
         </>

@@ -1,8 +1,10 @@
 import { defineConfig, globalIgnores } from "eslint/config";
-import nextPlugin from "@next/eslint-plugin-next";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
 
 export default defineConfig([
-  nextPlugin.configs.recommended,
-  nextPlugin.configs["core-web-vitals"],
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "node_modules/**"]),
+  ...nextVitals,
+  ...nextTypescript,
+  // Retained upstream bundle is scanned for security, but is not authored application source.
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "node_modules/**", "AI/teachablemachine-image.min.js"]),
 ]);
