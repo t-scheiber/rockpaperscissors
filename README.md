@@ -1,40 +1,36 @@
-# Rock Paper Scissors - Enhanced with AI
+# Rock Paper Scissors
 
-Welcome to the Rock Paper Scissors Webapp, an innovative, browser-based adaptation of the timeless game, first launched in 2022 and most recently refreshed in 2025. Built with Next.js, this application leverages advanced AI for input recognition, while gameplay pits you against programmed computer moves.
+Rock paper scissors against the computer, in the browser. You pick your move with the mouse, with the keyboard, or by holding your hand up to the webcam. A TensorFlow.js model classifies the webcam photo as rock, paper or scissors. The computer's move is random.
 
-**🌐 Live Site (English):** [rock-paper-scissors.thomasscheiber.com](https://rock-paper-scissors.thomasscheiber.com) | **🌐 Live Site (German):** [schere-stein-papier.thomasscheiber.com](https://schere-stein-papier.thomasscheiber.com)
+This was my bachelor project at FH Technikum Wien. I first built it in 2022 and refreshed it in 2025.
 
-> **Note:** A German version of this description is available below.
+Live at [rock-paper-scissors.thomasscheiber.com](https://rock-paper-scissors.thomasscheiber.com) (English) and [schere-stein-papier.thomasscheiber.com](https://schere-stein-papier.thomasscheiber.com) (German). The app itself is available in both languages, and a flag link in the header switches between them.
 
-## Features
+## How it plays
 
-- **Multiple Input Methods**: Play using the method that suits you best:
+- **Mouse.** Click the rock, paper or scissors image.
+- **Keyboard.** Press `R`, `P` or `S`. Shortcuts with Ctrl, Alt or Meta, and key presses inside text fields, are ignored.
+- **Webcam.** Press the capture button. The app takes one still frame, center-crops it to a square, scales it to 224 by 224 pixels and passes it to the model. It shows the model's guess, and you continue to the result page or retry.
 
-  - **Mouse**: A classic point-and-click interface.
-  - **Keyboard**: Responsive gameplay using keyboard shortcuts.
-  - **Webcam**: Leverage state-of-the-art AI to interpret your hand gestures through real-time image recognition powered by TensorFlow.js.
+The result page compares your move with the computer's random move and shows win, lose or draw. Each locale lives under its own path (`/en`, `/de`), and `/` redirects to `/en`.
 
-- **AI Integration for Gesture Recognition**: The webcam mode utilizes TensorFlow.js to analyze your hand gestures and accurately determine your move (rock, paper, or scissors).
+## The model
 
-- **Localized Experience**: Available in both German and English, facilitated by the `next-intl` package, making the game accessible to a diverse set of players.
+The model is a Teachable Machine image classifier with the labels Rock, Paper and Scissors and a 224 by 224 input (`public/AI/metadata.json`). It loads in the browser with `tf.loadLayersModel` from `public/AI/model.json` and `weights.bin`, so no server-side inference runs.
 
-- **Responsive and Stylish UI**: Designed with Tailwind CSS for a clean, modern look that adjusts seamlessly across devices.
+`Trainingsdaten_AI_Modell/` holds the training images, 1,838 for rock, 1,914 for paper and 1,919 for scissors. The repo contains no training scripts or notes, so how the model was trained is not documented here. The trained model is included as is.
 
-- **Cutting-Edge Technology**: Incorporates the latest Next.js 16 features, including the App Router and Turbopack build pipeline. The application is fully implemented in TypeScript to enhance code quality and maintainability.
+## Stack
 
-## How It Works
+- Next.js 16.4 with the App Router, React 19.3, TypeScript 6.0
+- Tailwind CSS 4.3, Radix UI, lucide-react
+- next-intl 4.15 for English and German, with routing in `i18n/routing.ts` and texts in `dictionaries/`
+- TensorFlow.js 4.22 and react-webcam
+- Vercel Speed Insights, loaded in the root layout
 
-1. **Select Input Method**: Begin by choosing how you want to interact with the game: mouse, keyboard, or webcam.
-2. **Make Your Move**: In webcam mode, show your choice of rock, paper, or scissors to the camera. The TensorFlow.js model processes this input to identify your gesture.
-3. **Computer's Turn**: A computer-generated move is created randomly at the same time.
-4. **Determine the Winner**: The app compares both choices based on classic Rock Paper Scissors rules to decide the winner.
+## Run it locally
 
-## Requirements
-
-- Node.js >= 20.9 (required by Next.js 16)
-- [Bun](https://bun.sh) >= 1.3 (used for dependency management and scripts)
-
-## Getting Started
+You need Node.js 22 (`engines` in `package.json` asks for `>=22.23.2 <23`) and [Bun](https://bun.sh).
 
 ```bash
 git clone https://github.com/t-scheiber/rockpaperscissors.git
@@ -43,104 +39,28 @@ bun install
 bun run dev
 ```
 
-Visit `http://localhost:3000` to enjoy the game! Or play directly online at [rock-paper-scissors.thomasscheiber.com](https://rock-paper-scissors.thomasscheiber.com/).
+Open `http://localhost:3000`. The app reads no environment variables. Browsers only allow webcam access on `localhost` or over HTTPS.
 
-### Useful Scripts
+## Scripts
 
-```bash
-bun run lint
-bun run build
-bun run start
-```
+| Script | What it runs |
+| --- | --- |
+| `bun run dev` | `next dev` |
+| `bun run build` | `next build` |
+| `bun run start` | `next start`, after a build |
+| `bun run lint` | `eslint .` |
+| `bun run typecheck` | `tsc --noEmit` |
+| `bun run test` | `node --test tests/*.test.mjs` |
 
-## Technologies Used
+The tests cover the game rules, keyboard handling, image preprocessing for the model, model loading with retry, and a production-server check of both locales and every public asset. The server check needs a prior `bun run build`. TensorFlow.js is stubbed in the model tests, so they do not run a real prediction.
 
-- **Next.js 16**: Empowers server-side rendering and static generation with Turbopack by default.
-- **TypeScript**: Provides strong typing to reduce runtime errors.
-- **Tailwind CSS**: Ensures a responsive, mobile-first design.
-- **TensorFlow.js**: Facilitates real-time hand gesture recognition.
-- **Next-Intl**: Offers comprehensive internationalization support.
+`tests/production.test.mjs` also hashes every training image, model file and public asset. It compares those hashes byte for byte, so it fails on a Windows checkout where Git converts line endings in `AI/teachablemachine-image.min.js` and `public/manifest.json`.
 
-This application showcases the integration of modern web technologies and AI, providing a unique and engaging user experience. First launched in 2022, it continues to evolve—most recently refreshed in 2025—to stay aligned with the latest Next.js capabilities. Test your strategy against the computer's random moves and enjoy a modern twist on the classic game of Rock Paper Scissors!
+## Repository layout
 
----
-
-## Deutsche Version
-
-Willkommen bei der Web-App "Schere Stein Papier", einer innovativen browserbasierten Adaption des zeitlosen Spiels, ursprünglich 2022 veröffentlicht und 2025 modernisiert. Entwickelt mit Next.js, nutzt diese Anwendung fortschrittliche KI für die Eingabeerkennung, während das Gameplay gegen zufällige Züge des Computers stattfindet.
-
-## Funktionen
-
-- **Mehrere Eingabemethoden**: Spielen Sie auf die Weise, die Ihnen am besten gefällt:
-
-  - **Maus**: Eine klassische Point-and-Click-Schnittstelle.
-  - **Tastatur**: Reaktionsfähiges Gameplay mit Tastaturkürzeln.
-  - **Webcam**: Nutzen Sie modernste KI, um Ihre Handgesten durch Echtzeit-Bilderkennung mittels TensorFlow.js zu interpretieren.
-
-- **KI-Integration zur Gestenerkennung**: Der Webcam-Modus verwendet TensorFlow.js, um Ihre Handgesten zu analysieren und Ihre Bewegung (Schere, Stein oder Papier) genau zu bestimmen.
-
-- **Lokalisierte Erfahrung**: Verfügbar in Deutsch und Englisch, ermöglicht durch das `next-intl` Paket, macht das Spiel zugänglich für eine diverse Spielerbasis.
-
-- **Responsives und Stilvolles UI**: Entworfen mit Tailwind CSS für ein sauberes, modernes Aussehen, das sich nahtlos über Geräte hinweg anpasst.
-
-- **Spitzentechnologie**: Beinhaltet die neuesten Funktionen von Next.js 16, einschließlich App Router und Turbopack. Die Anwendung ist vollständig in TypeScript implementiert, um die Qualität und Wartbarkeit des Codes zu verbessern.
-
-## Funktionsweise
-
-1. **Wählen Sie die Eingabemethode**: Beginnen Sie, indem Sie auswählen, wie Sie mit dem Spiel interagieren möchten: Maus, Tastatur oder Webcam.
-2. **Machen Sie Ihren Zug**: Im Webcam-Modus zeigen Sie Ihre Wahl von Schere, Stein oder Papier vor der Kamera. Das TensorFlow.js-Modell verarbeitet diese Eingabe, um Ihre Geste zu identifizieren.
-3. **Zug des Computers**: Gleichzeitig wird ein zufälliger Zug für den Computer generiert.
-4. **Ermitteln des Gewinners**: Die App vergleicht beide Wahlen anhand der klassischen Regeln von Schere, Stein, Papier, um den Gewinner zu ermitteln.
-
-## Voraussetzungen
-
-- Node.js >= 20.9 (Pflicht für Next.js 16)
-- [Bun](https://bun.sh) >= 1.3 (für Installation und Skripte)
-
-## Erste Schritte
-
-```bash
-git clone https://github.com/t-scheiber/rockpaperscissors.git
-cd rockpaperscissors
-bun install
-bun run dev
-```
-
-Besuchen Sie `http://localhost:3000`, um das Spiel zu genießen! Oder spielen Sie direkt online unter [schere-stein-papier.thomasscheiber.com](https://schere-stein-papier.thomasscheiber.com/).
-
-### Nützliche Skripte
-
-```bash
-bun run lint
-bun run build
-bun run start
-```
-
-## Verwendete Technologien
-
-- **Next.js 16**: Ermöglicht serverseitiges Rendering und statische Generierung mit Turbopack.
-- **TypeScript**: Bietet starke Typisierung, um Laufzeitfehler zu reduzieren.
-- **Tailwind CSS**: Gewährleistet ein responsives, mobile-first Design.
-- **TensorFlow.js**: Ermöglicht die Echtzeit-Erkennung von Handgesten.
-- **Next-Intl**: Bietet umfassende Unterstützung für Internationalisierung.
-
-Diese Anwendung zeigt die Integration von modernen Webtechnologien und KI, bietet ein einzigartiges und fesselndes Spielerlebnis. Ursprünglich 2022 veröffentlicht und 2025 modernisiert, bleibt sie technisch auf dem neuesten Stand. Testen Sie Ihre Strategie gegen die zufälligen Züge des Computers und genießen Sie eine moderne Wendung des klassischen Spiels Schere Stein Papier!
-
-## Maintenance validation
-
-The supported maintenance baseline uses Node.js 22.23.2 and Bun 1.4.2. Install with `bun install --frozen-lockfile`, then run:
-
-```sh
-bun run build
-bun run typecheck
-bun run lint
-bun run test
-```
-
-The tests cover all nine game outcomes in both languages, localized mouse links, invalid result input, keyboard shortcuts, camera capture and retry behavior, and recovery after a failed model or metadata load. Camera and model prediction calls are stubbed in component tests. No camera permission, provider credentials or live inference is required.
-
-The production test starts the built Next server on loopback, checks both locales and game routes, and verifies every original public asset. Separate checks preserve all 5,671 training images, the original model artifacts and other retained assets, and validate the model weight manifest. The application still uses `bun run start` for its Next server. It is not a static export or a Pages deployment.
-
-Inter is bundled locally from the verified Google Fonts publisher artifact; its license and provenance are in `app/fonts/`. The original training data, model binaries, translations and UI assets are retained. The legacy automation workflow remains disabled remotely; its existing action references are pinned without activating it.
-
-These local checks do not establish the revision or runtime of either live domain. A protected GitHub Actions diagnostic and deployment verification are still required before maintenance onboarding.
+- `app/[locale]/` has the home, mouse, keyboard, camera and result pages.
+- `components/` has the game components and the webcam component.
+- `lib/teachableModel.ts` loads the model and runs a prediction.
+- `public/AI/` holds the model the app serves. `AI/` holds a second export from two days later (`AI/metadata.json` is dated 2024-03-14, `public/AI/metadata.json` 2024-03-12) with different weights. The app does not load it.
+- `Trainingsdaten_AI_Modell/` has the training images.
+- `.github/renovate/` and `renovate.json` configure automated dependency updates.
