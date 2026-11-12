@@ -2,7 +2,7 @@
 
 Rock paper scissors against the computer, in the browser. You pick your move with the mouse, with the keyboard, or by holding your hand up to the webcam. A TensorFlow.js model classifies the webcam photo as rock, paper or scissors. The computer's move is random.
 
-This was a bachelor project (the footer says "Bachelorproject"). It was first built in 2022 and refreshed in 2025.
+This was my bachelor project at FH Technikum Wien. I first built it in 2022 and refreshed it in 2025.
 
 Live at [rock-paper-scissors.thomasscheiber.com](https://rock-paper-scissors.thomasscheiber.com) (English) and [schere-stein-papier.thomasscheiber.com](https://schere-stein-papier.thomasscheiber.com) (German). The app itself is available in both languages, and a flag link in the header switches between them.
 
