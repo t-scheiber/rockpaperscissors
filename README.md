@@ -16,9 +16,9 @@ The result page compares your move with the computer's random move and shows win
 
 ## The model
 
-The model is a Teachable Machine image classifier with the labels Rock, Paper and Scissors and a 224 by 224 input (`public/AI/metadata.json`). It loads in the browser with `tf.loadLayersModel` from `public/AI/model.json` and `weights.bin`, so no server-side inference runs.
+I trained the model myself in Google's Teachable Machine. It is an image classifier with the labels Rock, Paper and Scissors and a 224 by 224 input (`public/AI/metadata.json`). It loads in the browser with `tf.loadLayersModel` from `public/AI/model.json` and `weights.bin`, so no server-side inference runs.
 
-`Trainingsdaten_AI_Modell/` holds the training images, 1,838 for rock, 1,914 for paper and 1,919 for scissors. The repo contains no training scripts or notes, so how the model was trained is not documented here. The trained model is included as is.
+`Trainingsdaten_AI_Modell/` holds the 5,671 training images, 1,838 for rock, 1,914 for paper and 1,919 for scissors. Teachable Machine trains in the browser, so the repo has no training scripts. To retrain, upload the three folders as classes in Teachable Machine, train, and export the TensorFlow.js model into `public/AI/`.
 
 ## Stack
 
